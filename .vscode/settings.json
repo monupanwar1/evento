@@ -1,0 +1,57 @@
+{
+  "files.associations": {
+    "iostream": "cpp",
+    "ostream": "cpp"
+  },
+  "code-runner.preserve Focus": false,
+  "editor.peekWidgetDefaultFocus": "tree",
+  "editor.renderControlCharacters": true,
+  "editor.renderLineHighlight": "line",
+  "diffEditor.codeLens": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.columnSelection": false,
+  "editor.experimentalInlineEdit.showToolbar": "onHover",
+  "editor.guides.bracketPairs": false,
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.language.colorizedBracketPairs": [],
+  "editor.tabCompletion": "on",
+  "editor.wrappingIndent": "same",
+  "css.styleSheets": ["src/**/*.css"],
+
+  "editor.renderWhitespace": "all",
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true,
+
+  // "editor.fontWeight": "bold",
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "breadcrumbs.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 14,
+  "editor.lineNumbers": "off",
+  "explorer.confirmDragAndDrop": false,
+  "editor.wordWrap": "on",
+  "explorer.confirmDelete": false,
+  "reactSnippets.settings.importReactOnTop": false,
+  "editor.cursorBlinking": "expand",
+  "editor.find.cursorMoveOnType": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "git.openRepositoryInParentFolders": "never",
+  "workbench.iconTheme": "material-icon-theme",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.accessibilitySupport": "off",
+  "terminal.integrated.env.windows": {},
+  "git.autofetch": true,
+  "workbench.statusBar.visible": false,
+
+  "window.menuBarVisibility": "compact",
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "window.zoomLevel": 2,
+  "workbench.activityBar.location": "hidden"
+}
