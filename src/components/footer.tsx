@@ -1,5 +1,31 @@
+import Link from "next/link"
+
+const routes =[
+  {
+    name:"Term&Conditions",
+    path:"/terms-conditions"
+
+  },
+  {
+    name:"PrivacyPolicy",
+    path:"/privacy-policy"
+  }
+  
+]
+
+
 export default function Footer() {
   return (
-    <footer>Footer</footer>
+
+    <footer className="mt-auto  flex items-center justify-between border-t border-white/10 h-16 px-3 sm:px-9 text-xs text-white/25">
+      <small className="text-xs">&copy; 2050KunalPanwar All right reserved</small>
+      <ul className="flex gap-x-3 sm:gap-x-8">
+        {routes.map(route=>(
+          <li key={route.path}>
+            <Link href={route.path}>{route.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </footer>
   )
 }
