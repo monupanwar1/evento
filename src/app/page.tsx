@@ -1,3 +1,4 @@
+import H1 from "@/components/h1";
 import SearchForm from "@/components/search-form";
 import Link from "next/link";
 
@@ -5,9 +6,9 @@ export default function page() {
   
   return (
     <main className="flex flex-col items-center pt-36 px-3">
-      <h1 className="font-bold text-3xl lg:text-6xl  tracking-tight">
+      <H1>
         Find events around you
-      </h1>
+      </H1>
       <p className="mb-12 mt-7 text-2xl lg:text-3xl opacity-75">
         Browse more than{" "}
         <span className="text-[#a4f839] font-bold italic  underline">
