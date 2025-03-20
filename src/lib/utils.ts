@@ -1,8 +1,6 @@
-import clsx from "clsx";
-import { ClassValue } from "clsx";
-import { ClassValidator, twMerge } from "tailwind-merge";
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs:ClassValue[]){
-   twMerge(clsx(inputs));
-
+export function cn(...classes: (string | undefined | false)[]) {
+  return twMerge(clsx(classes)); 
 }
