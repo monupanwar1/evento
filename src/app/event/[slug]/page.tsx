@@ -1,19 +1,30 @@
 import H1 from "@/components/h1";
 import Image from "next/image";
+import { Metadata } from "next";
+import { capitalize, getEvent } from "@/lib/utils";
 
-type EventPagesProps = {
+type Props = {
   params: {
     slug: string;
   };
 };
 
-export default async function EventPage({ params }: EventPagesProps) {
-  const{ slug} = params;
-  const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
-  );
 
-  const event = await response.json();
+export async  function generateMetadata({params}:Props):Promise<Metadata>{
+
+  const slug= params.slug;
+  const event=await getEvent(slug);
+  return{
+   title:event.name,
+    
+
+  }
+}
+
+
+export default async function EventPage({ params }: Props) {
+  const slug = params.slug; // ✅ Removed await
+  const event=await getEvent(slug);
 
   return (
     <main>

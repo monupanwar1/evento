@@ -1,20 +1,29 @@
 import EventsList from "@/components/events-lists";
 import H1 from "@/components/h1";
-import { EventoEvent } from "@/lib/types";
+import Loading from "./loading";
+import { Suspense } from "react";
+import { Metadata } from "next";
+import { title } from "process";
+import { capitalize } from "@/lib/utils";
 
-type EventPageProps = {
+
+type Props = {
   params: {
     city: string;
   };
 };
 
-export default async function EventsPage({ params }: EventPageProps) {
- const {city} =await params;
+export function generateMetadata({params}:Props){
 
-  const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
-  );
-  const events: EventoEvent[] = await response.json();
+  const city= params.city;
+  return{
+    title: city==="all"?"All Events":`Events in ${capitalize(city)}`
+
+  }
+}
+
+export default async function EventsPage({ params }: Props) {
+  const { city } = await params;
 
   return (
     <main className="flex text-center items-center flex-col py-24 px-[20px] min-h-[110vh]">
@@ -24,7 +33,9 @@ export default async function EventsPage({ params }: EventPageProps) {
             ? "All Events"
             : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
         </H1>
-        <EventsList events={events} />
+        <Suspense fallback={<Loading/>}>
+          <EventsList city={city} />
+        </Suspense>
       </div>
     </main>
   );

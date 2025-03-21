@@ -1,10 +1,14 @@
-import { EventoEvent } from "@/lib/types";
 import EventCard from "./event-card";
+import { getEvents } from "@/lib/utils";
 
 type EventsListsProps = {
-  events: EventoEvent[];
+  city:string;
 };
-export default function EventsList({ events }: EventsListsProps) {
+export default async function EventsList({ city }: EventsListsProps) {
+
+  const events = await getEvents(city);
+  
+
   return (
     <section className="flex flex-wrap gap-10 justify-center max-w-[1100px]">
       {events.map((event) => (
