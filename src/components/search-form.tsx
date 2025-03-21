@@ -10,7 +10,7 @@ export default function SearchForm() {
   const hanldeSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!searchText) return;
-    router.push(`events/${searchText}`);
+    router.push(`/events/${searchText}`);
   };
   return (
     <form onSubmit={hanldeSubmit} className="w-full sm:w-[580px]">
