@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type SkeletonProps={
-  className?:string; //
+  className?:string; 
 }
 
 
