@@ -1,6 +1,7 @@
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { PrismaClient } from "@prisma/client";
+import { notFound } from "next/navigation";
 
 
 
@@ -43,6 +44,10 @@ export async function getEvent(slug: string) {
       slug: slug,
     },
   });
+  if(!event){
+    return notFound();
+
+  }
   return event;
 }
 
