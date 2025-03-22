@@ -1,10 +1,10 @@
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EventoEvent, PrismaClient } from "@prisma/client";
-import prisma from "./db";
+import { PrismaClient } from "@prisma/client";
 
 
-const primsa = new PrismaClient();
+
+const prisma = new PrismaClient();
 
 export function cn(...classes: (string | undefined | false)[]) {
   return twMerge(clsx(classes)); 
@@ -28,20 +28,18 @@ export async function getEvents(city:string){
 
   const events =await prisma.eventoEvent.findMany({
     where:{
-      city:capitalize(city)
+      city:city==="all"? undefined:capitalize(city),
     }
   })
   return events;
 
 }
-export async function getEvent(slug:string){
-  // const response =await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`)
-
-  const event =await primsa.eventoEvent.findUnique({
-    where:{
-      slug:slug,
+export async function getEvent(slug: string) {
+  const event = await prisma.eventoEvent.findUnique({
+    where: {
+      slug: slug,
     },
   });
   return event;
-
 }
+

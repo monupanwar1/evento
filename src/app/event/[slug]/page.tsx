@@ -1,7 +1,8 @@
 import H1 from "@/components/h1";
 import Image from "next/image";
 import { Metadata } from "next";
-import { capitalize, getEvent } from "@/lib/utils";
+import { getEvent } from "@/lib/utils";
+import { EventoEvent } from "@prisma/client";
 
 type Props = {
   params: {
@@ -9,22 +10,27 @@ type Props = {
   };
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params;
+  const event = await getEvent(slug);
 
-export async  function generateMetadata({params}:Props):Promise<Metadata>{
-
-  const {slug}= await params;
-  const event=await getEvent(slug);
-  return{
-   title:event.name,
-    
-
-  }
+  return {
+    title: event?.name || "Default Event Title",
+  };
 }
 
-
 export default async function EventPage({ params }: Props) {
-  const slug = params.slug; // ✅ Removed await
-  const event=await getEvent(slug);
+  const { slug } = params;
+  const event: EventoEvent | null = await getEvent(slug);
+
+  if (!event) {
+    return (
+      <main className="text-center py-16">
+        <h1 className="text-3xl">Event Not Found</h1>
+        <p className="text-lg text-white/75">Sorry, we couldn't find this event.</p>
+      </main>
+    );
+  }
 
   return (
     <main>
@@ -35,7 +41,7 @@ export default async function EventPage({ params }: Props) {
           alt="Event background image"
           fill
           quality={50}
-          sizes="(max-width:1280px) 100vw, 1280px" // ✅ 
+          sizes="(max-width:1280px) 100vw, 1280px"
           priority
         />
         <div className="z-1 flex flex-col gap-6 lg:gap-16 relative lg:flex-row">
@@ -46,7 +52,6 @@ export default async function EventPage({ params }: Props) {
             width={300}
             height={201}
           />
-
           <div className="flex flex-col">
             <p className="text-white/75">
               {new Date(event.date).toLocaleDateString("en-US", {
@@ -55,7 +60,6 @@ export default async function EventPage({ params }: Props) {
                 day: "numeric",
               })}
             </p>
-
             <H1 className="mb-2 mt-1 whitespace-nowrap lg:text-5xl">
               {event.name}
             </H1>
@@ -82,7 +86,7 @@ export default async function EventPage({ params }: Props) {
   );
 }
 
-// ✅ Fixed SectionHeading: Changed <section> to <h2>
+// Components
 function Section({ children }: { children: React.ReactNode }) {
   return <section className="mb-12">{children}</section>;
 }
@@ -93,8 +97,8 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function SectionContent({ children }: { children: React.ReactNode }) {
   return (
-    <section className="mx-auto text-lg leading-8 text-white/75 max-w-4xl">
+    <div className="mx-auto text-lg leading-8 text-white/75 max-w-4xl">
       {children}
-    </section>
+    </div>
   );
 }
