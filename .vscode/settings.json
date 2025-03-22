@@ -26,6 +26,9 @@
 
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
   "breadcrumbs.enabled": false,
   "editor.minimap.enabled": false,
   "editor.fontSize": 14,

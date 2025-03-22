@@ -6,20 +6,17 @@ import { Metadata } from "next";
 import { title } from "process";
 import { capitalize } from "@/lib/utils";
 
-
 type Props = {
   params: {
     city: string;
   };
 };
 
-export function generateMetadata({params}:Props){
-
-  const city= params.city;
-  return{
-    title: city==="all"?"All Events":`Events in ${capitalize(city)}`
-
-  }
+export function generateMetadata({ params }: Props) {
+  const city = params.city;
+  return {
+    title: city === "all" ? "All Events" : `Events in ${capitalize(city)}`,
+  };
 }
 
 export default async function EventsPage({ params }: Props) {
@@ -33,7 +30,7 @@ export default async function EventsPage({ params }: Props) {
             ? "All Events"
             : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
         </H1>
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
           <EventsList city={city} />
         </Suspense>
       </div>
