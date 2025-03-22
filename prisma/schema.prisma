@@ -18,7 +18,8 @@ model EventoEvent {
   location      String
   date          DateTime
   organizerName String
+  imageUrl      String
   description   String
-  cratedAt      DateTime @default(now())
+  createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
