@@ -5,13 +5,12 @@ import { getEvent } from "@/lib/utils";
 import { EventoEvent } from "@prisma/client";
 
 type Props = {
-  params: {
-    slug: string;
-  };
+  params: Record<string, string>;
 };
 
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await Promise.resolve(params); 
   const event = await getEvent(slug);
 
   return {
@@ -20,14 +19,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function EventPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await Promise.resolve(params);
   const event: EventoEvent | null = await getEvent(slug);
 
   if (!event) {
     return (
       <main className="text-center py-16">
         <h1 className="text-3xl">Event Not Found</h1>
-        <p className="text-lg text-white/75">Sorry, we couldn't find this event.</p>
+        <p className="text-lg text-white/75">
+          Sorry, we couldn&apos;t find this event.
+        </p>
       </main>
     );
   }
