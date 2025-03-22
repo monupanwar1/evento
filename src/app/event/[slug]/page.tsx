@@ -12,7 +12,7 @@ type Props = {
 
 export async  function generateMetadata({params}:Props):Promise<Metadata>{
 
-  const slug= params.slug;
+  const {slug}= await params;
   const event=await getEvent(slug);
   return{
    title:event.name,
