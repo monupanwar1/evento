@@ -22,7 +22,8 @@ export function sleep(ms:number){
 }
 
 
-export async function getEvents(city:string){
+export async function getEvents(city:string,page=1){
+  
   // const response =await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`)
 
   // const events:EventoEvent[]=await response.json();
@@ -33,9 +34,24 @@ export async function getEvents(city:string){
     },
     orderBy:{
       date:"asc"
-    }
-  })
-  return events;
+    },
+    take:6,
+    skip:(page-1)*6
+  });
+   let totalCount;
+   if (city === 'all') {
+     totalCount = await prisma.eventoEvent.count();
+   } else {
+     totalCount = await prisma.eventoEvent.count({
+       where: {
+         city: capitalize(city),
+       },
+     });
+   }
+  return {
+    events,
+    totalCount,
+  };
 
 }
 export async function getEvent(slug: string) {
