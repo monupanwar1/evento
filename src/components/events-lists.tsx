@@ -8,7 +8,7 @@ type EventsListsProps = {
 };
 export default async function EventsList({ city,page }: EventsListsProps) {
 
-  
+   
    const { events, totalCount } = await getEvents(city, page);
 
    const previousPath = page > 1 ? `/events/${city}?page=${page - 1}` : '';

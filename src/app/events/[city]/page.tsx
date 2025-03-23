@@ -36,7 +36,7 @@ export default async function EventsPage({ params, searchParams }: EventsPagePro
             ? 'All Events'
             : `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
         </H1>
-        <Suspense fallback={<Loading />}>
+        <Suspense key={city + page} fallback={<Loading />}>
           <EventsList city={city} page={page} />
         </Suspense>
       </div>
