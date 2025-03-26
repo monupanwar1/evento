@@ -1,22 +1,14 @@
 import H1 from '@/components/h1';
 import { getEvent } from '@/lib/utils';
-import { Metadata } from 'next';
+
 import Image from 'next/image';
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {slug }= await Promise.resolve(params)
-  const event = await getEvent(slug);
-
-  return {
-    title: event.name,
-  };
+interface PageProps {
+  params: Promise<{ slug: string }>;
+  
 }
+
+
 
 export async function generateStaticParams() {
   // top 100 most popular events
@@ -30,8 +22,8 @@ export async function generateStaticParams() {
   ];
 }
 
-export default async function EventPage({ params }: Props) {
-  const {slug }= await Promise.resolve(params)
+export default async function EventPage({ params }: PageProps) {
+  const {slug} = await params
   const event = await getEvent(slug);
 
   return (

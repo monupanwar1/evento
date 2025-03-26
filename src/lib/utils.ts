@@ -2,14 +2,18 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
+import { ClassValue } from "clsx";
+
 
 
 
 const prisma = new PrismaClient();
 
-export function cn(...classes: (string | undefined | false)[]) {
-  return twMerge(clsx(classes)); 
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(...inputs));
 }
+
 
 export function capitalize(string:string){
   return string.charAt(0).toUpperCase()+string.slice(1);
