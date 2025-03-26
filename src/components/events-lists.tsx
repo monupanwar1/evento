@@ -4,9 +4,9 @@ import PaginationControls from "./pagination-controls";
 
 type EventsListsProps = {
   city:string;
-  page:number;
+  page?:number;
 };
-export default async function EventsList({ city,page }: EventsListsProps) {
+export default async function EventsList({ city,page=1}: EventsListsProps) {
 
    
    const { events, totalCount } = await getEvents(city, page);
