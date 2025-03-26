@@ -16,7 +16,7 @@ type EventsPageProps = Props & {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({ params }: Props): Metadata {
+export async function generateMetadata({ params }: Props):Promise<Metadata>{
    const { city } = await Promise.resolve(params);
   return {
     title: city === 'all' ? 'All Events' : `Events in ${capitalize(city)}`,
