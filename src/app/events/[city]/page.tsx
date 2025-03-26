@@ -10,27 +10,28 @@ type Props = {
   params: {
     city: string;
   };
-};
-
-type EventsPageProps = Props & {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({ params }: Props):Promise<Metadata>{
-   const { city } = await Promise.resolve(params);
+// ✅ Correct way to use `params` in Next.js 15
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { city } = await Promise.resolve(params);
   return {
     title: city === 'all' ? 'All Events' : `Events in ${capitalize(city)}`,
   };
 }
 
+// ✅ Schema for validating `page` query parameter
 const pageNumberSchema = z.coerce.number().int().positive().optional();
 
-export default async function EventsPage({
-  params,
-  searchParams,
-}: EventsPageProps) {
-  const {city} = await Promise.resolve(params);
-  const parsedPage = pageNumberSchema.safeParse(searchParams.page);
+export default async function EventsPage({ params, searchParams }: Props) {
+  const { city } = await Promise.resolve(params); // ✅ No need to await `params`
+  const resolvedSearchParams = await Promise.resolve(searchParams); // ✅ Await searchParams
+
+  // ✅ Safely access `searchParams.page`
+  const page = resolvedSearchParams.page ?? '1';
+  const parsedPage = pageNumberSchema.safeParse(page);
+
   if (!parsedPage.success) {
     throw new Error('Invalid page number');
   }
@@ -38,8 +39,7 @@ export default async function EventsPage({
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
       <H1 className="mb-28">
-        {city === 'all' && 'All Events'}
-        {city !== 'all' && `Events in ${capitalize(city)}`}
+        {city === 'all' ? 'All Events' : `Events in ${capitalize(city)}`}
       </H1>
 
       <Suspense key={city + parsedPage.data} fallback={<Loading />}>
