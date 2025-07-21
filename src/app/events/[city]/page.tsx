@@ -5,6 +5,7 @@ import Loading from './loading';
 import { capitalize } from '@/lib/utils';
 import { z } from 'zod';
 
+
 // Define interface with Promise types
 interface PageProps {
   params: Promise<{ city: string }>;
@@ -13,6 +14,7 @@ interface PageProps {
     [key: string]: string | string[] | undefined;
   }>;
 }
+const validCities = ['austin', 'seattle', 'all'];
 
 // ✅ Schema for validating page query parameter
 const pageNumberSchema = z.coerce.number().int().positive().optional();
@@ -34,14 +36,16 @@ export default async function EventsPage({ params, searchParams }: PageProps) {
     throw new Error('Invalid page number');
   }
 
+  const normalizedCity=validCities.includes(city?.toLowerCase())?city:'all';
+
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
       <H1 className="mb-28">
-        {city === 'all' ? 'All Events' : `Events in ${capitalize(city || '')}`}
+        {normalizedCity === 'all' ? 'All Events' : `Events in ${capitalize(normalizedCity)}`}
       </H1>
 
-      <Suspense key={city + parsedPage.data} fallback={<Loading />}>
-        <EventsList city={city} page={parsedPage.data} />
+      <Suspense key={normalizedCity + parsedPage.data} fallback={<Loading />}>
+        <EventsList city={normalizedCity} page={parsedPage.data} />
       </Suspense>
     </main>
   );

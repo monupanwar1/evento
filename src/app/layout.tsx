@@ -24,8 +24,8 @@ export default function RootLayout({
         className={cn(
           inter.className,
           'bg-gray-950 overflow-y-scroll',
-          'text-white', // ✅ Directly add always-applied classes
-          false && 'text-white/50' // ✅ Conditional classes
+          'text-white', 
+          false && 'text-white/50' 
         )}
       >
         <Container>

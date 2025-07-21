@@ -28,9 +28,7 @@ export function sleep(ms:number){
 
 export async function getEvents(city:string,page=1){
   
-  // const response =await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`)
-
-  // const events:EventoEvent[]=await response.json();
+ 
 
   const events =await prisma.eventoEvent.findMany({
     where:{

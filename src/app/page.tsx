@@ -5,13 +5,13 @@ import Link from "next/link";
 export default function page() {
   
   return (
-    <main className="flex flex-col items-center pt-36 px-3">
+    <main className="flex flex-col items-center justifu-center  pt-36 px-3">
       <H1>
         Find events around you
       </H1>
-      <p className="mb-12 mt-7 text-2xl lg:text-3xl opacity-75">
+      <p className="mb-12 mt-7 text-2xl lg:text-3xl opacity-75 text-center">
         Browse more than{" "}
-        <span className="text-[#a4f839] font-bold italic  underline">
+        <span className="text-[#a4f839] font-bold italic text-center underline">
           10,000 events{" "}
         </span>{" "}
         around you
@@ -23,7 +23,7 @@ export default function page() {
         <p>Popular:</p>
         <div className="space-x-2 font-semibold">
           <Link href="events/austin">Austin</Link>
-          <Link href="events/seattle">Slug</Link>
+          <Link href="events/seattle">seattle</Link>
         </div>
       </section>
     </main>
